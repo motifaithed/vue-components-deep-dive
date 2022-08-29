@@ -1,7 +1,10 @@
 <template>
   <div>
     <the-header></the-header>
-    <badge-list></badge-list>
+    <button @click="setSelectedComponent('active-goals')">Active Goals</button>
+    <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
+    <component :is="selectedComponent"></component>
+    <!-- <badge-list></badge-list>
     <user-info
       :full-name="activeUser.name"
       :info-text="activeUser.description"
@@ -11,22 +14,27 @@
       <template #default="goalProps">
         <h2>{{ goalProps.item }}</h2> 
       </template>
-    </course-goals>
+    </course-goals> -->
   </div>
+
 </template>
 
 <script>
 import TheHeader from './components/TheHeader.vue';
-import UserInfo from './components/UserInfo.vue';
-import BadgeList from './components/BadgeList.vue';
-import CourseGoals from './components/CourseGoals.vue';
+import ManageGoals from './components/ManageGoals';
+import ActiveGoals from './components/ActiveGoals.vue';
+// import UserInfo from './components/UserInfo.vue';
+// import BadgeList from './components/BadgeList.vue';
+// import CourseGoals from './components/CourseGoals.vue';
 
 export default {
   components:{
     TheHeader,
-    UserInfo,
-    BadgeList,
-    CourseGoals
+    ManageGoals,
+    ActiveGoals
+    // UserInfo,
+    // BadgeList,
+    // CourseGoals
   },
   data() {
     return {
@@ -35,8 +43,14 @@ export default {
         description: 'Site owner and admin',
         role: 'admin',
       },
+      selectedComponent: 'active-goals'
     };
   },
+  methods:{
+    setSelectedComponent(component){  
+        this.selectedComponent = component;
+    }
+  }
 };
 </script>
 
